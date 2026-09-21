@@ -23,6 +23,14 @@ def ver_metas():
         print(f"{i}. {meta['descripcion']} - {estado}")
 
 
+def eliminar_meta(indice):
+    if indice < 0 or indice >= len(metas):
+        print("Ese numero de meta no existe.")
+        return
+    eliminada = metas.pop(indice)
+    print(f"Meta eliminada: {eliminada['descripcion']}")
+
+
 def contar_cumplidas():
     total = sum(1 for m in metas if m["cumplida"])
     print(f"Metas cumplidas: {total} de {len(metas)}")
@@ -33,7 +41,8 @@ def mostrar_menu():
     print("Organiza tus objetivos y sigue tu progreso")
     print("1. Agregar meta")
     print("2. Ver metas")
-    print("3. Salir")
+    print("3. Eliminar meta")
+    print("4. Salir")
 
 
 continuar = True
@@ -48,6 +57,13 @@ while continuar:
     elif opcion == "2":
         ver_metas()
     elif opcion == "3":
+        ver_metas()
+        indice = input("Numero de la meta a eliminar: ")
+        if indice.isdigit():
+            eliminar_meta(int(indice))
+        else:
+            print("Debes escribir un numero.")
+    elif opcion == "4":
         print("Hasta luego!")
         continuar = False
     else:
