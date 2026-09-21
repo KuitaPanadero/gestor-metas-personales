@@ -31,6 +31,17 @@ def eliminar_meta(indice):
     print(f"Meta eliminada: {eliminada['descripcion']}")
 
 
+def marcar_como_cumplida(indice):
+    if indice < 0 or indice >= len(metas):
+        print("Ese numero de meta no existe.")
+        return
+    if metas[indice]["cumplida"]:
+        print("Esa meta ya estaba cumplida.")
+        return
+    metas[indice]["cumplida"] = True
+    print(f"Meta cumplida: {metas[indice]['descripcion']}")
+
+
 def contar_cumplidas():
     total = sum(1 for m in metas if m["cumplida"])
     print(f"Metas cumplidas: {total} de {len(metas)}")
@@ -42,7 +53,8 @@ def mostrar_menu():
     print("1. Agregar meta")
     print("2. Ver metas")
     print("3. Eliminar meta")
-    print("4. Salir")
+    print("4. Marcar meta como cumplida")
+    print("5. Salir")
 
 
 continuar = True
@@ -64,6 +76,13 @@ while continuar:
         else:
             print("Debes escribir un numero.")
     elif opcion == "4":
+        ver_metas()
+        indice = input("Numero de la meta a marcar como cumplida: ")
+        if indice.isdigit():
+            marcar_como_cumplida(int(indice))
+        else:
+            print("Debes escribir un numero.")
+    elif opcion == "5":
         print("Hasta luego!")
         continuar = False
     else:
